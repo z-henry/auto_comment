@@ -708,7 +708,7 @@ if __name__ == '__main__':
         logger.info('已启用AI评价')
         if "OPENAI_API_BASE_URL" in os.environ:
             logger.info('  - 使用 OpenAI API 代理：' + os.environ["OPENAI_API_BASE_URL"])
-        elif os.environ.get("ProxyUrl").startswith("http"):
+        elif os.environ.get("ProxyUrl") and os.environ.get("ProxyUrl").startswith("http"):
             os.environ['http_proxy'] = os.getenv("ProxyUrl")
             os.environ['https_proxy'] = os.getenv("ProxyUrl")
             logger.info('  - 使用QL配置文件ProxyUrl代理：' + os.environ["ProxyUrl"])
