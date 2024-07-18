@@ -467,6 +467,7 @@ def review(N, opts=None):
         return N
     except Exception as e:
         print (e)
+        opts['logger'].info(e)
 
 # 服务评价
 def Service_rating(N, opts=None):
