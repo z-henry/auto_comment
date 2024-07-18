@@ -269,7 +269,7 @@ def sunbw(N, opts=None):
         #        opts['logger'].debug('Loop: %d / %d', idx + 1, loop_times)
         #        opts['logger'].debug('Fetching order data in another XPath')
         #        elems = i.xpath(
-        #            '//*[@id="main"]/div[2]/div[2]/table')
+        #            '//div[2]/table')
         #        opts['logger'].debug('Count of fetched order data: %d', len(elems))
         #        Order_data.extend(elems)
     
@@ -409,7 +409,7 @@ def review(N, opts=None):
             opts['logger'].debug('Loop: %d / %d', idx + 1, loop_times)
             opts['logger'].debug('Fetching order data in the default XPath')
             elems = i.xpath(
-                '//*[@id="main"]/div[2]/div[2]/table/tr[@class="tr-bd"]')
+                '//*[@id="main"]/div[2]/div[2]/table/tbody/tr[@class="tr-bd"]')
             opts['logger'].debug('Count of fetched order data: %d', len(elems))
             Order_data.extend(elems)
         #if len(Order_data) != N['待追评']:
