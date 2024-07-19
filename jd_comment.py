@@ -18,6 +18,7 @@ import random
 import sys
 import time,re
 import urllib.parse
+import notify
 
 try:
     import jieba  # just for linting
@@ -268,7 +269,7 @@ def sunbw(N, opts=None):
         #        opts['logger'].debug('Loop: %d / %d', idx + 1, loop_times)
         #        opts['logger'].debug('Fetching order data in another XPath')
         #        elems = i.xpath(
-        #            '//*[@id="main"]/div[2]/div[2]/table')
+        #            '//div[2]/table')
         #        opts['logger'].debug('Count of fetched order data: %d', len(elems))
         #        Order_data.extend(elems)
     
@@ -408,7 +409,7 @@ def review(N, opts=None):
             opts['logger'].debug('Loop: %d / %d', idx + 1, loop_times)
             opts['logger'].debug('Fetching order data in the default XPath')
             elems = i.xpath(
-                '//*[@id="main"]/div[2]/div[2]/table/tr[@class="tr-bd"]')
+                '//*[@id="main"]/div[2]/div[2]/table/tbody/tr[@class="tr-bd"]')
             opts['logger'].debug('Count of fetched order data: %d', len(elems))
             Order_data.extend(elems)
         #if len(Order_data) != N['待追评']:
@@ -466,6 +467,7 @@ def review(N, opts=None):
         return N
     except Exception as e:
         print (e)
+        opts['logger'].info(e)
 
 # 服务评价
 def Service_rating(N, opts=None):
@@ -570,6 +572,7 @@ def main(opts=None):
     opts['logger'].debug('N value after executing No(): %s', N)
     if not N:
         opts['logger'].error('CK错误，请确认是否电脑版CK！')
+        notify.send('京东自动评价', 'CK错误，请确认是否电脑版CK！')
         return
     if N['待评价订单'] != 0:
         opts['logger'].info("1.开始评价晒单")
@@ -708,7 +711,7 @@ if __name__ == '__main__':
         logger.info('已启用AI评价')
         if "OPENAI_API_BASE_URL" in os.environ:
             logger.info('  - 使用 OpenAI API 代理：' + os.environ["OPENAI_API_BASE_URL"])
-        elif os.environ.get("ProxyUrl").startswith("http"):
+        elif os.environ.get("ProxyUrl") and os.environ.get("ProxyUrl").startswith("http"):
             os.environ['http_proxy'] = os.getenv("ProxyUrl")
             os.environ['https_proxy'] = os.getenv("ProxyUrl")
             logger.info('  - 使用QL配置文件ProxyUrl代理：' + os.environ["ProxyUrl"])
