@@ -18,7 +18,7 @@ import random
 import sys
 import time,re
 import urllib.parse
-import notify
+#import notify
 
 try:
     import jieba  # just for linting
@@ -572,7 +572,7 @@ def main(opts=None):
     opts['logger'].debug('N value after executing No(): %s', N)
     if not N:
         opts['logger'].error('CK错误，请确认是否电脑版CK！')
-        notify.send('京东自动评价', 'CK错误，请确认是否电脑版CK！')
+        #notify.send('京东自动评价', 'CK错误，请确认是否电脑版CK！')
         return
     if N['待评价订单'] != 0:
         opts['logger'].info("1.开始评价晒单")
