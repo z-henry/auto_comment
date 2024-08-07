@@ -603,7 +603,7 @@ if __name__ == '__main__':
                         action='store_true')
     parser.add_argument('--log-level',
                         help='specify logging level (default: info)',
-                        default='INFO')
+                        default='DEBUG')
     parser.add_argument('-o', '--log-file', help='specify logging file')
     args = parser.parse_args()
     if args.log_level.upper() not in [
